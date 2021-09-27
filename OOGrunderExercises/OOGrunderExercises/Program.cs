@@ -6,3 +6,10 @@ Person person2 = new Person("Olga", 33);
 
 Account account = new Account();
 account._amount = 1234.56;
+
+
+// Exercise: mer konstruktorer - 2
+Product product1 = new();
+Product product2 = new(10);
+
+
