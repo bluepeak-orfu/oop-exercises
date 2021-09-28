@@ -16,5 +16,37 @@ namespace OOGrunderExercises
             _name = name;
             _age = age;
         }
+
+        public void SetAge(int newAge)
+        {
+            if (newAge > 100)
+            {
+                newAge = 100;
+            }
+            else if (newAge < 1)
+            {
+                newAge = 1;
+            }
+
+            _age = newAge;
+
+            //if (newAge > 100)
+            //{
+            //    _age = 100;
+            //}
+            //else if (newAge < 1)
+            //{
+            //    _age = 1;
+            //}
+            //else
+            //{
+            //    _age = newAge;
+            //}
+        }
+
+        public int GetAge()
+        {
+            return _age;
+        }
     }
 }
