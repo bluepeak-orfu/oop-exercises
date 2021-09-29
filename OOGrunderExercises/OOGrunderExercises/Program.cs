@@ -24,7 +24,6 @@ using OOGrunderExercises;
 //Console.WriteLine($"Result: {result}");
 
 
-
 // Klasser – metoder 2 - 1
 Movie m1 = new Movie("Abc");
 m1.PersonSeenMovie();
