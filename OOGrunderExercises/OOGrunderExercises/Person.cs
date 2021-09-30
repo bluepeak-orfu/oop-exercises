@@ -11,6 +11,35 @@ namespace OOGrunderExercises
         private string _name;
         private int _age;
 
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+        }
+
+        public int Age
+        {
+            get
+            {
+                return _age;
+            }
+            set
+            {
+                if (value > 100)
+                {
+                    value = 100;
+                }
+                else if (value < 1)
+                {
+                    value = 1;
+                }
+
+                _age = value;
+            }
+        }
+
         public Person(string name, int age)
         {
             _name = name;

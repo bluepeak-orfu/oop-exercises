@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOGrunderExercises
 {
-    class IntPair
+    class IntPair2
     {
         private int _value1;
         private int _value2;
-        private double _average;
 
         public int Value1
         {
@@ -21,7 +20,6 @@ namespace OOGrunderExercises
             set
             {
                 _value1 = value;
-                RecomputeAverage();
             }
         }
 
@@ -34,7 +32,6 @@ namespace OOGrunderExercises
             set
             {
                 _value2 = value;
-                RecomputeAverage();
             }
         }
 
@@ -42,20 +39,14 @@ namespace OOGrunderExercises
         {
             get
             {
-                return _average;
+                return (_value1 + _value2) / 2.0; ;
             }
         }
 
-        public IntPair(int value1, int value2)
+        public IntPair2(int value1, int value2)
         {
             _value1 = value1;
             _value2 = value2;
-            RecomputeAverage();
-        }
-
-        private void RecomputeAverage()
-        {
-            _average = (_value1 + _value2) / 2.0;
         }
 
         public int GetValue1()
@@ -66,21 +57,14 @@ namespace OOGrunderExercises
         {
             return _value2;
         }
-        public double GetAverage()
-        {
-            return _average;
-        }
-
 
         public void SetValue1(int value1)
         {
             _value1 = value1;
-            RecomputeAverage();
         }
         public void SetValue2(int value2)
         {
             _value2 = value2;
-            RecomputeAverage();
         }
 
     }
