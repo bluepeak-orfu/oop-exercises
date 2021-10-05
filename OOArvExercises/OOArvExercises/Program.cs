@@ -51,3 +51,21 @@ using OOArvExercises;
 //        x.DerivedMessage();
 //    }
 //}
+
+
+
+
+// Exercise: abstract och interfaces - 2
+Greeter greeter = new FriendlyGreeter();
+greeter.SayHello();
+
+// Exercise: abstract och interfaces - 4
+IMovable[] movableObjects = new IMovable[3];
+movableObjects[0] = new Book();
+movableObjects[1] = new Chair();
+movableObjects[2] = new Book();
+
+foreach (IMovable item in movableObjects)
+{
+    item.Move(55, 12);
+}
