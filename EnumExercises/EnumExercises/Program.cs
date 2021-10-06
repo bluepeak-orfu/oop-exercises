@@ -9,7 +9,7 @@ while (myPizzaOrder != OrderStatus.Delivered)
     {
         case OrderStatus.Ordered:
             Console.WriteLine("Is the pizza ready?");
-            string readyResponse = Console.ReadLine();
+            string readyResponse = Console.ReadLine(); 
             if (readyResponse == "y")
             {
                 myPizzaOrder = OrderStatus.Ready;
