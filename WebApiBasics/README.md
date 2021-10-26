@@ -79,4 +79,3 @@ de två parametrarna och returnerar resultatet av sammanslagningen.
 
 Starta programmet och verifiera att det fungerar genom att anropas det
 med sökvägen: /api/exercise/concat?part1=hello&part2=there
-
