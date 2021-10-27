@@ -11,32 +11,31 @@ namespace WebApiMappings.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        [HttpGet("get")]
-        public Person GetPerson()
+        private static List<Person> persons = new List<Person>();
+
+        [HttpGet("{personId}")]
+        public Person GetPerson(int personId)
         {
-            Person person;
-            person = new Person()
+            foreach (Person person in persons)
             {
-                Name = "Pelle",
-                Age = 12
-            };
-            return person;
+                if (person.Id == personId)
+                {
+                    return person;
+                }
+            }
+            return null;
         }
 
-        [HttpGet("list")]
+        [HttpGet]
         public List<Person> ListPersons()
         {
-            return new List<Person>()
-            {
-                new Person() { Name = "Adam", Age = 22 },
-                new Person() { Name = "Berit", Age = 33 },
-                new Person() { Name = "Calle", Age = 44 }
-            };
+            return persons;
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public bool CreatePerson([FromBody] Person person)
         {
+            persons.Add(person);
             return true;
         }
     }
