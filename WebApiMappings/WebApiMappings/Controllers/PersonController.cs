@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiMappings.Managers;
 
 namespace WebApiMappings.Controllers
 {
@@ -11,32 +12,23 @@ namespace WebApiMappings.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private static List<Person> persons = new List<Person>();
 
         [HttpGet("{personId}")]
         public Person GetPerson(int personId)
         {
-            foreach (Person person in persons)
-            {
-                if (person.Id == personId)
-                {
-                    return person;
-                }
-            }
-            return null;
+            return PersonManager.Instance.Get(personId);
         }
 
         [HttpGet]
         public List<Person> ListPersons()
         {
-            return persons;
+            return PersonManager.Instance.List();
         }
 
         [HttpPost]
         public bool CreatePerson([FromBody] Person person)
         {
-            persons.Add(person);
-            return true;
+            return PersonManager.Instance.Create(person);
         }
     }
 }
