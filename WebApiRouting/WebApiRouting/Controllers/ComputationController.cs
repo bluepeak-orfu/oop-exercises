@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiRouting;
 
 namespace WebApiBasics.Controllers
 {
@@ -69,6 +70,26 @@ namespace WebApiBasics.Controllers
                 result += message;
             }
             return result;
+        }
+
+        [HttpGet("create-addition")]
+        public ComputeUnit CreateAdditionComputation(int value1, int value2)
+        {
+            ComputeUnit result;
+            result = new ComputeUnit()
+            {
+                Value1 = value1,
+                Value2 = value2,
+                Mode = "addition"
+            };
+            return result;
+
+            //return new ComputeUnit()
+            //{
+            //    Value1 = value1,
+            //    Value2 = value2,
+            //    Mode = "addition"
+            //};
         }
     }
 }
