@@ -22,9 +22,28 @@ namespace TrainTravelCo.Controllers
         }
 
         [HttpGet]
-        public List<Trip> GetTrips()
+        public List<AvailableTripDTO> GetTrips()
         {
-            return _tripManager.ListTrips();
+            List<Trip> trips = _tripManager.ListTrips();
+            List<AvailableTripDTO> result = new List<AvailableTripDTO>();
+            foreach (Trip trip in trips)
+            {
+                List<Customer> customers = new List<Customer>();
+                foreach (Booking booking in trip.Bookings)
+                {
+                    customers.Add(booking.Customer);
+                }
+                AvailableTripDTO tripDto = new AvailableTripDTO()
+                {
+                    From = trip.From,
+                    To = trip.To,
+                    Time = trip.Time,
+                    TrainId = trip.Train.Id,
+                    Customers = customers
+                };
+                result.Add(tripDto);
+            }
+            return result;
         }
 
         [HttpPost]

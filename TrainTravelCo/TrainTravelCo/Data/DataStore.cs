@@ -31,7 +31,7 @@ namespace TrainTravelCo.Data
             _trips = new List<Trip>();
 
             Train train1 = new Train() { MaxSeats = 10, RegNumber = "ABC" };
-            Train train2 = new Train() { MaxSeats = 12, RegNumber = "DEF" };
+            Train train2 = new Train() { MaxSeats = 2, RegNumber = "DEF" };
             SaveTrain(train1);
             SaveTrain(train2);
             Trip trip1 = new Trip()
