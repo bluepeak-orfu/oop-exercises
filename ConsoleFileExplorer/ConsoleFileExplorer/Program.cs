@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ConsoleFileExplorer
 {
@@ -6,7 +7,6 @@ namespace ConsoleFileExplorer
     {
         static void Main(string[] args)
         {
-            new ConsoleExplorer().Run();
         }
     }
 }
