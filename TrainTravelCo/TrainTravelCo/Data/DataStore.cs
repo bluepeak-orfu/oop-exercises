@@ -23,10 +23,12 @@ namespace TrainTravelCo.Data
         }
 
         private List<Train> _trains;
+        private List<Trip> _trips;
 
         private DataStore()
         {
             _trains = new List<Train>();
+            _trips = new List<Trip>();
         }
 
         public List<Train> ListTrains()
@@ -37,6 +39,16 @@ namespace TrainTravelCo.Data
         public void SaveTrain(Train train)
         {
             _trains.Add(train);
+        }
+
+        public List<Trip> ListTrips()
+        {
+            return _trips;
+        }
+
+        public void SaveTrip(Trip trip)
+        {
+            _trips.Add(trip);
         }
     }
 }
