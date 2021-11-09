@@ -22,6 +22,10 @@ namespace TrainTravelCo.Data
                     {
                         _instance = new MultiFileDataStore();
                     }
+                    else if (Type == DataStoreType.SingleFile)
+                    {
+                        _instance = new SingleFileDataStore();
+                    }
                     else
                     {
                         Console.WriteLine("Unsupported data type format");
@@ -31,16 +35,8 @@ namespace TrainTravelCo.Data
             }
         }
 
-        private List<Trip> _trips;
-
         protected DataStore()
         {
-            _trips = new List<Trip>();
-
-            if (!Directory.Exists("application-data"))
-            {
-                Directory.CreateDirectory("application-data");
-            }
         }
 
         public abstract List<Train> ListTrains();

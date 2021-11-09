@@ -35,6 +35,7 @@ namespace TrainTravelCo.Controllers
                 }
                 AvailableTripDTO tripDto = new AvailableTripDTO()
                 {
+                    Id = trip.Id,
                     From = trip.From,
                     To = trip.To,
                     Time = trip.Time,

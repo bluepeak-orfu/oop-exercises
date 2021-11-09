@@ -7,6 +7,6 @@ namespace TrainTravelCo
 {
     public enum DataStoreType
     {
-        MultiFile
+        MultiFile, SingleFile
     }
 }

@@ -14,7 +14,7 @@ namespace TrainTravelCo
     {
         public static void Main(string[] args)
         {
-            DataStore.Type = DataStoreType.MultiFile;
+            DataStore.Type = DataStoreType.SingleFile;
             CreateHostBuilder(args).Build().Run();
         }
 

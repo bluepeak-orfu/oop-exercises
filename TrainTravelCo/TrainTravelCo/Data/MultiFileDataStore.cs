@@ -9,6 +9,14 @@ namespace TrainTravelCo.Data
 {
     public class MultiFileDataStore : DataStore
     {
+        public MultiFileDataStore()
+        {
+            if (!Directory.Exists("application-data"))
+            {
+                Directory.CreateDirectory("application-data");
+            }
+        }
+
         public override List<Train> ListTrains()
         {
             List<Train> result = new List<Train>();
