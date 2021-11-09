@@ -22,5 +22,11 @@ namespace TrainTravelCo.Models
             Bookings = new List<Booking>();
         }
 
+        public Trip(int id)
+        {
+            Id = id;
+            Bookings = new List<Booking>();
+        }
+
     }
 }

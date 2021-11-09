@@ -17,5 +17,10 @@ namespace TrainTravelCo.Models
         {
             Id = _idCounter++;
         }
+
+        public Train(int id)
+        {
+            Id = id;
+        }
     }
 }

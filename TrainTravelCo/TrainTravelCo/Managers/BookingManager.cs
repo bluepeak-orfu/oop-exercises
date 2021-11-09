@@ -48,6 +48,7 @@ namespace TrainTravelCo.Managers
             };
 
             trip.Bookings.Add(booking);
+            DataStore.Instance.SaveTrip(trip);
         }
 
         private Trip GetTrip(int tripId)
