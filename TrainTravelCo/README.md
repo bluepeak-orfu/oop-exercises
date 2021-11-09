@@ -633,12 +633,12 @@ Läs upp alla rader från trips.txt och loopa över dem. För varje rad
 splitar vi värdena på komma-tecken. Vi kan nu sätta ID:t och de tre
 strängvärdena. Samt att vi kan hämta tåg-instansen från GetTrain.
 
-Bokningarna är fortfarande ihop packade som en sträng. Vi måste först
+Bokningarna är fortfarande ihoppackade som en sträng. Vi måste först
 splitta på "|" för att få ut varje bokning för sig. Sen måste vi
 splitta varje sånt värde på "&" för att få namn och telefon.
 
 Splitta först på "|" och loopa sen över värdena vi får från split-
-resultatet. I loopen splittar vi på "6" och kan från det läsa ut
+resultatet. I loopen splittar vi på "&" och kan från det läsa ut
 namn och telefonnummer. Skapa instanser av Customer och Bookings
 i denna loop och lägg Bookings i en lista. Använd sedan listan för
 att skapa upp Trip-instanserna.
