@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrainTravelCo.Data;
 
 namespace TrainTravelCo
 {
@@ -13,6 +14,7 @@ namespace TrainTravelCo
     {
         public static void Main(string[] args)
         {
+            DataStore.Type = DataStoreType.MultiFile;
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -7,9 +7,10 @@ using TrainTravelCo.Models;
 
 namespace TrainTravelCo.Data
 {
-    public class DataStore
+    public abstract class DataStore
     {
         private static DataStore _instance;
+        public static DataStoreType Type { get; set; }
 
         public static DataStore Instance
         {
@@ -17,7 +18,14 @@ namespace TrainTravelCo.Data
             {
                 if (_instance == null)
                 {
-                    _instance = new DataStore();
+                    if (Type == DataStoreType.MultiFile)
+                    {
+                        _instance = new MultiFileDataStore();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unsupported data type format");
+                    }
                 }
                 return _instance;
             }
@@ -25,7 +33,7 @@ namespace TrainTravelCo.Data
 
         private List<Trip> _trips;
 
-        private DataStore()
+        protected DataStore()
         {
             _trips = new List<Trip>();
 
@@ -35,132 +43,14 @@ namespace TrainTravelCo.Data
             }
         }
 
-        public List<Train> ListTrains()
-        {
-            List<Train> result = new List<Train>();
-            string[] files = Directory.GetFiles("application-data");
-            foreach (string file in files)
-            {
-                string fileName = Path.GetFileName(file);
-                if (fileName.StartsWith("train_"))
-                {
-                    string[] data = File.ReadAllLines(file);
-                    string idString = data[0];
-                    string regNumber = data[1];
-                    string maxSeatsString = data[2];
-                    int id = Convert.ToInt32(idString);
-                    int maxSeats = Convert.ToInt32(maxSeatsString);
-                    Train train = new Train(id)
-                    {
-                        RegNumber = regNumber,
-                        MaxSeats = maxSeats
-                    };
-                    result.Add(train);
-                }
-            }
-            return result;
-        }
+        public abstract List<Train> ListTrains();
 
-        public Train GetTrain(int trainId)
-        {
-            string fileName = $"application-data/train_{trainId}.txt";
-            string[] data = File.ReadAllLines(fileName);
-            string idString = data[0];
-            string regNumber = data[1];
-            string maxSeatsString = data[2];
-            int id = Convert.ToInt32(idString);
-            int maxSeats = Convert.ToInt32(maxSeatsString);
-            Train train = new Train(id)
-            {
-                RegNumber = regNumber,
-                MaxSeats = maxSeats
-            };
-            return train;
-        }
+        public abstract Train GetTrain(int trainId);
 
-        public void SaveTrain(Train train)
-        {
-            int trainId = train.Id;
-            string fileName = $"application-data/train_{trainId}.txt";
-            string[] data = new string[]
-            {
-                trainId.ToString(),
-                train.RegNumber,
-                train.MaxSeats.ToString()
-            };
-            File.WriteAllLines(fileName, data);
-        }
+        public abstract void SaveTrain(Train train);
 
-        public List<Trip> ListTrips()
-        {
-            List<Trip> result = new List<Trip>();
-            string[] files = Directory.GetFiles("application-data");
-            foreach (string file in files)
-            {
-                string fileName = Path.GetFileName(file);
-                if (fileName.StartsWith("trip_"))
-                {
-                    FileStream fileStream = File.OpenRead(file);
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        int id = Convert.ToInt32(reader.ReadLine());
-                        string from = reader.ReadLine();
-                        string to = reader.ReadLine();
-                        string time = reader.ReadLine();
-                        int trainId = Convert.ToInt32(reader.ReadLine());
-                        Train train = GetTrain(trainId);
+        public abstract List<Trip> ListTrips();
 
-                        Trip trip = new Trip(id)
-                        {
-                            From = from,
-                            To = to,
-                            Time = time,
-                            Train = train
-                        };
-                        result.Add(trip);
-
-                        while (!reader.EndOfStream)
-                        {
-                            string customerName = reader.ReadLine();
-                            string customerPhone = reader.ReadLine();
-                            Customer customer = new Customer()
-                            {
-                                Name = customerName,
-                                Phone = customerPhone
-                            };
-                            Booking booking = new Booking()
-                            {
-                                Trip = trip,
-                                Customer = customer
-                            };
-                            trip.Bookings.Add(booking);
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        public void SaveTrip(Trip trip)
-        {
-            int tripid = trip.Id;
-            string fileName = $"application-data/trip_{tripid}.txt";
-            FileStream fileStream = File.Create(fileName);
-            using (StreamWriter writer = new StreamWriter(fileStream))
-            {
-                writer.WriteLine(trip.Id);
-                writer.WriteLine(trip.From);
-                writer.WriteLine(trip.To);
-                writer.WriteLine(trip.Time);
-
-                writer.WriteLine(trip.Train.Id);
-
-                foreach (Booking booking in trip.Bookings)
-                {
-                    writer.WriteLine(booking.Customer.Name);
-                    writer.WriteLine(booking.Customer.Phone);
-                }
-            }
-        }
+        public abstract void SaveTrip(Trip trip);
     }
 }
